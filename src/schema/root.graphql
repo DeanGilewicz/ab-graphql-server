@@ -1,0 +1,6 @@
+type Query {
+	# need to define at least one field
+	test: String
+}
+
+type Mutation

@@ -1,0 +1,35 @@
+extend type Query {
+	books: [Book!]!
+	book(id: ID!): Book!
+}
+
+extend type Mutation {
+	addBook(input: BookInput!): Book!
+	updateBook(input: BookInput!): Book!
+	deleteBook(input: BookDeleteInput!): BookDeleteResult!
+	removeBookAuthor(input: BookAuthorInput!): Book!
+}
+
+type Book {
+	id: ID!
+	title: String!
+	author: Author
+}
+
+type BookDeleteResult {
+	id: ID!
+}
+
+input BookInput {
+	id: ID
+	title: String
+	authorId: ID
+}
+
+input BookDeleteInput {
+	id: ID!
+}
+
+input BookAuthorInput {
+	id: ID!
+}

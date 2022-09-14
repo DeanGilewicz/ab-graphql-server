@@ -1,0 +1,26 @@
+#Ignore cache files
+.eslintignore
+.git
+.gitignore
+.vscode
+.dockerignore
+npm-debug.log
+
+#Ignore CI/CD
+.circleci
+
+#Ignore build
+dist
+
+#Ignore dependencies
+node_modules
+
+#Ignore Docker
+Dockerfile
+
+#Ignore test
+.jest-cache
+jest.config.ts
+
+#Ignore project files
+README.md

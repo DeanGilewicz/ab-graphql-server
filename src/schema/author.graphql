@@ -1,0 +1,45 @@
+extend type Query {
+	authors(filter: AuthorFilter!, sortBy: AuthorSortType): [Author!]!
+	author(id: ID!): Author!
+}
+
+extend type Mutation {
+	addAuthor(input: AuthorInput!): Author!
+	updateAuthor(input: AuthorInput!): Author!
+	deleteAuthor(input: AuthorDeleteInput!): AuthorDeleteResult!
+	deleteAuthorBooks(input: AuthorBookInput!): Author!
+}
+
+type Author {
+	id: ID!
+	firstName: String!
+	lastName: String!
+	books: [Book!]
+}
+
+type AuthorDeleteResult {
+	id: ID!
+}
+
+input AuthorInput {
+	id: ID
+	firstName: String
+	lastName: String
+	bookIds: [ID!]
+}
+
+input AuthorBookInput {
+	id: ID!
+	bookIds: [ID!]!
+}
+
+input AuthorFilter {
+	id: [ID!]
+	firstName: [String!]
+	lastName: [String!]
+	bookIds: [ID!]
+}
+
+input AuthorDeleteInput {
+	id: ID!
+}

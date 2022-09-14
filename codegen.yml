@@ -1,0 +1,11 @@
+schema: "./src/schema/*.graphql"
+# documents: ""
+generates:
+  ./src/types.ts:
+    config:
+      enumValues:
+        AuthorSortType: "./enums/index#AuthorSortType"
+    plugins:
+      - typescript
+      - typescript-resolvers
+      - typescript-operations

@@ -14,7 +14,8 @@
 		"start:staging": "NODE_ENV=production ts-node -r tsconfig-paths/register src/index.ts",
 		"test": "jest",
 		"test:coverage": "jest --coverage",
-		"test:watch": "jest --watch"
+		"test:watch": "jest --watch",
+		"tsc": "tsc"
 	},
 	"author": "Dean Gilewicz",
 	"license": "ISC",

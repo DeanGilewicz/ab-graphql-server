@@ -3,7 +3,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <h2 align="center">:computer: :books: Authors Books GraphQL Server</h2>
+  <h2 align="center">🖊️Authors 📚Books GraphQL Server</h2>
   <p align="center">
     A Fastify and Mercurius GraphQL server!
     <br />

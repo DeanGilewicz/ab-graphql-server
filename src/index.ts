@@ -23,7 +23,7 @@ app.register(fastifyCors, {
 app.register(mercurius, {
 	schema: schemaWithResolvers,
 	graphiql: true,
-	context: (request, reply) => {
+	context: () => {
 		return {
 			// TODO: look into setting up tests for https://github.com/mercurius-js/mercurius-integration-testing
 			dbAuthors: env === "production" ? authors : devAuthors,

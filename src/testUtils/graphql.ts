@@ -9,6 +9,7 @@ export const graphqlTestCall = async ({
 	authors = [],
 	books = [],
 }: {
+	// eslint-disable-next-line
 	query: any;
 	authors?: Author[];
 	books?: Book[];

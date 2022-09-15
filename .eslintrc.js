@@ -8,4 +8,5 @@ module.exports = {
 	env: {
 		node: true, // enable Node.js global variables
 	},
+	ignorePatterns: ["src/types.ts"],
 };

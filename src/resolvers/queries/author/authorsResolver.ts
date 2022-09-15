@@ -6,7 +6,7 @@ import {
 } from "src/types";
 
 export const authors: Pick<QueryResolvers, "authors"> = {
-	authors: (parent, args, context, info) => {
+	authors: (parent, args, context) => {
 		console.log("Query - authors - parent", parent);
 
 		const filters: AuthorFilter = { ...args.filter };

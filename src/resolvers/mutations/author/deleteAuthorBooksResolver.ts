@@ -2,7 +2,7 @@ import { cloneDeep } from "lodash";
 import { Author, Book, MutationResolvers } from "src/types";
 
 export const deleteAuthorBooks: Pick<MutationResolvers, "deleteAuthorBooks"> = {
-	deleteAuthorBooks: (parent, args, context, info) => {
+	deleteAuthorBooks: (parent, args, context) => {
 		console.log("Mutation - deleteAuthorBooks - parent", parent);
 		const { id, bookIds } = args.input;
 

@@ -3,14 +3,13 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <h2 align="center">🖊️Authors 📚Books GraphQL Server</h2>
+  <h2 align="center">✍📚 Authors Books - GraphQL Server</h2>
   <p align="center">
     A Fastify and Mercurius GraphQL server!
-    <br />
-    <a href=""><strong>View Demo »</strong></a>
   </p>
 </div>
 
+<br />
 <!-- TABLE OF CONTENTS -->
 <details>
   <summary>Table of Contents</summary>
@@ -32,15 +31,15 @@
   </ol>
 </details>
 
-<!-- ABOUT THE PROJECT -->
+<br />
 
 ## About The Project
 
-This example project provides a GraphQL server allowing for CRUD operations for `Author` and `Book`. There is no persistent layer (e.g. no Database) meaning restarting the server will cause all data to be lost.
+This example project provides a GraphQL server allowing for CRUD operations of `Author` and `Book`. There is no persistent layer (e.g. no Database) meaning restarting the server will cause all data to be lost.
 
 There were several reasons for working on this project, including the chance to:
 
-- implement a GraphQL server with codegen
+- implement a GraphQL server
 - set up and use TypeScript
 - explore the use of test factories
 - implement test coverage
@@ -48,7 +47,7 @@ There were several reasons for working on this project, including the chance to:
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-### Built With
+### **Built With**
 
 Below is a list of major frameworks/libraries that were used to bootstrap this project.
 
@@ -60,13 +59,13 @@ Below is a list of major frameworks/libraries that were used to bootstrap this p
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-<!-- GETTING STARTED -->
+<br />
 
 ## Getting Started
 
 The following information will provide you with the details necessary to get the application up and running locally.
 
-### Prerequisites
+### **Prerequisites**
 
 On your operating system of choice, ensure that [NodeJS](https://nodejs.org/en/) version `16.6.1` is installed. It is recommended that a Node Version Manager be used, such as [NVM](https://github.com/nvm-sh/nvm). When installing `NodeJS` this way, the correctly associated `npm` version should automatically be installed.
 
@@ -74,7 +73,7 @@ On your operating system of choice, ensure that [NodeJS](https://nodejs.org/en/)
 nvm install node@16.6.1
 ```
 
-### Installation
+### **Installation**
 
 Once `NodeJS` and `npm` is installed you can follow these steps:
 

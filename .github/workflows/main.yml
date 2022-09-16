@@ -1,4 +1,5 @@
 name: Production Deploy
+# Fly.io uses Dockerfile to build application
 
 on:
   push:
@@ -10,9 +11,15 @@ env:
 
 jobs:
   deploy:
-    name: Deploy app
+    name: Deploy App
     runs-on: ubuntu-latest
+    # relying on "PR Preview" workflow to take care of checks
     steps:
-      - uses: actions/checkout@v2
-      - uses: superfly/flyctl-actions/setup-flyctl@master
-      - run: flyctl deploy --remote-only
+      - name: 🏁 Checkout Repo
+        uses: actions/checkout@v2
+
+      - name: 🏁 Prepare Fly.io
+        uses: superfly/flyctl-actions/setup-flyctl@master
+
+      - name: 🚀 Deploy to Fly.io
+        run: flyctl deploy --remote-only

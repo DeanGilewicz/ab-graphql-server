@@ -132,7 +132,7 @@ Object {
 		}`;
 
 		// When we attempt to remove an author's book
-		const { gql, db } = await graphqlTestCall({ query, authors, books });
+		const { gql } = await graphqlTestCall({ query, authors, books });
 		// Then the author is returned
 		expect(gql).toEqual({
 			data: {

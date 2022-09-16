@@ -1,0 +1,25 @@
+name: Production Deploy
+# Fly.io uses Dockerfile to build application
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+
+jobs:
+  deploy:
+    name: Deploy App
+    runs-on: ubuntu-latest
+    # relying on "PR Preview" workflow to take care of checks
+    steps:
+      - name: 🏁 Checkout Repo
+        uses: actions/checkout@v2
+
+      - name: 🏁 Prepare Fly.io
+        uses: superfly/flyctl-actions/setup-flyctl@master
+
+      - name: 🚀 Deploy to Fly.io
+        run: flyctl deploy --remote-only

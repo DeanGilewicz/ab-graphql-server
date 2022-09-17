@@ -126,3 +126,17 @@ Once the server is up and running you can visit the [GraphiQL endpoint](http://0
 Note: restarting the server will cause all data to be lost.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+
+[fastify]: https://img.shields.io/badge/Fastify-20232A?style=for-the-badge&logo=fastify&logoColor=ffffff
+[fastify-url]: https://www.fastify.io/
+[mercurius]: https://img.shields.io/badge/Mercurius-ff9b00?style=for-the-badge&logo=Mercurius-&logoColor=ffffff
+[mercurius-url]: https://mercurius.dev/
+[graphql]: https://img.shields.io/badge/GraphQL-1E252D?style=for-the-badge&logo=graphql&logoColor=E10098&
+[graphql-url]: https://graphql.org/
+[typescript]: https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=ffffff
+[typescript-url]: https://www.typescriptlang.org/
+[jest]: https://img.shields.io/badge/Jest-15c213?style=for-the-badge&logo=jest&logoColor=C21325
+[jest-url]: https://jestjs.io/

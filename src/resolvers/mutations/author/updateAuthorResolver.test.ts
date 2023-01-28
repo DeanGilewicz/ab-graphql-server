@@ -181,4 +181,54 @@ Object {
 		expect(db.books[1].author?.id).toEqual(db.authors[0].id);
 		expect(db.books[2].author?.id).toEqual(db.authors[0].id);
 	});
+
+	it("updates an author's name when associated to books", async () => {
+		// Given a book with a defined author
+		const author = { id: "a:1", firstName: "demo 1", lastName: "user 1" };
+		const book = { id: "b:1", title: "Existing Book", author };
+		const authors = [factory.newAuthor({ ...author, books: [book] })];
+		const books = [factory.newBook(book)];
+		// and a mutation with author input
+		const query = `mutation updateAuthor {
+			updateAuthor(input: { id: "a:1", firstName: "demo 2", lastName: "user 2" } ) {
+        id
+        firstName
+        lastName
+        books {
+          id
+          title
+					author {
+						id
+						firstName
+						lastName
+					}
+        }
+      }
+		}`;
+
+		// When we attempt to update an author
+		const { gql, db } = await graphqlTestCall({ query, authors, books });
+
+		// Then the author is updated
+		expect(gql).toEqual({
+			data: {
+				updateAuthor: {
+					id: "a:1",
+					firstName: "demo 2",
+					lastName: "user 2",
+					books: [
+						{
+							id: "b:1",
+							title: "Existing Book",
+							author: { id: "a:1", firstName: "demo 2", lastName: "user 2" },
+						},
+					],
+				},
+			},
+		});
+		// and book reflects the updated name
+		expect(db.books[0].author?.id).toEqual(db.authors[0].id);
+		expect(db.books[0].author?.firstName).toEqual("demo 2");
+		expect(db.books[0].author?.lastName).toEqual("user 2");
+	});
 });

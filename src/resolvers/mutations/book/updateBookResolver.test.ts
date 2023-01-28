@@ -135,7 +135,7 @@ Object {
 	});
 
 	it("updates book and assigns author when author has existing books", async () => {
-		// Given two authors - 1 with and 1 without association to this book
+		// Given two authors with associated books
 		const book1 = { id: "b:1" };
 		const book2 = { id: "b:2" };
 		const book3 = { id: "b:3" };
@@ -177,5 +177,51 @@ Object {
 		// and the authors are also updated to correctly associate only one author to this book
 		expect(db.authors[0].books).toEqual([book2]);
 		expect(db.authors[1].books).toEqual([book3, db.books[0]]);
+	});
+
+	it("updates book title when associated to an author", async () => {
+		// Given an author with an associated book
+		const book = { id: "b:1", title: "Original Title" };
+		const author = factory.newAuthor({ id: "a:1", books: [book] });
+		const authors = [author];
+		const books = [factory.newBook({ ...book, author })];
+		// and a mutation with book input
+		const query = `mutation updateBook {
+			updateBook(input: { id: "b:1", title: "New Title" }) {
+        id
+        title
+        author {
+          id
+          firstName
+          lastName
+					books {
+						id
+						title
+					}
+        }
+      }
+		}`;
+
+		// When we attempt to update the book
+		const { gql, db } = await graphqlTestCall({ query, authors, books });
+
+		// Then the book is updated with correct title
+		expect(gql).toEqual({
+			data: {
+				updateBook: {
+					id: "b:1",
+					title: "New Title",
+					author: {
+						id: "a:1",
+						firstName: "first name",
+						lastName: "last name",
+						books: [{ id: "b:1", title: "New Title" }],
+					},
+				},
+			},
+		});
+		// and the author is updated to reflect correct book title
+		expect(db.authors[0].books![0].id).toEqual(db.books[0].id);
+		expect(db.authors[0].books![0].title).toEqual("New Title");
 	});
 });

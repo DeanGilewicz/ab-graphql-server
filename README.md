@@ -146,7 +146,7 @@ The application provides a variety of commands in `package.json`:
 - build
   - builds non-dockerized production application
 - build:docker
-  - handles type for docker build
+  - handles types when building docker
 - copy:graphql
   - copies graphql schema from `src` to `dist`
 - graphql-codegen

@@ -221,7 +221,7 @@ Object {
 			},
 		});
 		// and the author is updated to reflect correct book title
-		expect(db.authors[0].books![0].id).toEqual(db.books[0].id);
-		expect(db.authors[0].books![0].title).toEqual("New Title");
+		expect(db.authors[0].books?.[0].id).toEqual(db.books[0].id);
+		expect(db.authors[0].books?.[0].title).toEqual("New Title");
 	});
 });

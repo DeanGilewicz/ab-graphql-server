@@ -19,6 +19,18 @@
       <ul>
         <li><a href="#built-with">Built With</a></li>
       </ul>
+      <ul>
+        <li><a href="#api">API</a></li>
+      </ul>
+      <ul>
+        <li><a href="#rules">Rules</a></li>
+      </ul>
+       <ul>
+        <li><a href="#no-data-persistance">No Data Persistance</a></li>
+      </ul>
+       <ul>
+        <li><a href="#testing">Testing</a></li>
+      </ul>
     </li>
     <li>
       <a href="#getting-started">Getting Started</a>
@@ -28,6 +40,7 @@
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
+    <li><a href="#cicd">CI/CD</a></li>
   </ol>
 </details>
 
@@ -35,7 +48,7 @@
 
 ## About The Project
 
-This example project provides a GraphQL server allowing for CRUD operations of `Author` and `Book`. There is no persistent layer (e.g. no Database) meaning restarting the server will cause all data to be lost.
+This example project provides a GraphQL server allowing for CRUD operations of `Author` and `Book`. There is no persistent layer (no Database) meaning restarting the server will cause all data to be lost.
 
 There were several reasons for working on this project, including the chance to:
 
@@ -56,6 +69,38 @@ Below is a list of major frameworks/libraries that were used to bootstrap this p
 - [![GraphQL][graphql]][graphql-url]
 - [![TypeScript][typescript]][typescript-url]
 - [![Jest][jest]][jest-url]
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+### **API**
+
+The API is provided via a Mercurius GraphQL adapter that has been used with Fastify - the web framework on top of Node JS.
+
+[GraphQL codegen](https://the-guild.dev/graphql/codegen) has also been used to generate types for the application based on `.graphql` files in the `schema` directory.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+### **Rules**
+
+An `author` can have many `book`s but a `book` can only have one author. An `author` can be created with out `book` and a `book` can be created without an `author`. A `book` can be removed from an `author` and an `author` can be removed from a `book`.
+
+Logic exists in `updateAuthorResolver` to throw when an attempt is made to associate an `author` to a `book` when the `book` already has an `author`.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+### **No Data Persistance**
+
+Each time a mutation is invoked, the app creates a copy of the data using [splice](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice). This method modifies the existing data (in our case we remove current data and replace with a "copied" state), allowing tests to keep its reference to the original data to be able to assert against. This is due to storing data in memory and not persisting to a database.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+### **Testing**
+
+A `GraphQl` mock helper function `graphqlTestCall` has been created to enable testing expected behavior. Assertions can be made against the GraphQL request and response, and the outcome of mutations.
+
+Test factories have been created for both `author` and `book` to more easily set up data for the different test scenarios.
+
+Jest has been used as the test framework and coverage reporting is also set up
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -99,9 +144,9 @@ Once `NodeJS` and `npm` is installed you can follow these steps:
 The application provides a variety of commands in `package.json`:
 
 - build
-  - builds application
+  - builds non-dockerized production application
 - build:docker
-  - TBD?
+  - handles type for docker build
 - copy:graphql
   - copies graphql schema from `src` to `dist`
 - graphql-codegen
@@ -124,6 +169,14 @@ The application provides a variety of commands in `package.json`:
 Once the server is up and running you can visit the [GraphiQL endpoint](http://0.0.0.0:8080/graphiql) to interact with the GraphQL server. You can click `Docs` to see the available `queries` and `mutations`. See [GraphiQL](https://github.com/graphql/graphiql) for more information.
 
 Note: restarting the server will cause all data to be lost.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## CI/CD
+
+The application has been dockerized in order to provide an easier way to manage deployment.
+
+Currently, [GitHub Actions](https://docs.github.com/en/actions) has been set up as the CI/CD solution. There is an action for PR review that runs `linting`, `type checking` and `tests` and there is an action to facilitate production deployment.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

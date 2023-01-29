@@ -17,6 +17,7 @@ export const updateBook: Pick<MutationResolvers, "updateBook"> = {
 		const updatedBook: Book = {
 			id,
 			title: title ? title : existingBook.title,
+			author: existingBook.author,
 		};
 
 		if (authorId) {
@@ -51,6 +52,38 @@ export const updateBook: Pick<MutationResolvers, "updateBook"> = {
 
 			// set author for updated book
 			updatedBook.author = author;
+		} else {
+			// allow update of book fields on associated author when author not provided
+			if (
+				updatedBook.author &&
+				updatedBook.author.books &&
+				updatedBook.author.books.length > 0
+			) {
+				// when book has an existing author we need to update the title
+				const authors: Author[] = cloneDeep(context.dbAuthors);
+
+				// update book title for author that has this associated book
+				const modifiedAuthors = authors.map((a) => {
+					if (a.id === updatedBook.author?.id) {
+						if (a.books) {
+							const bookToUpdate = a.books.find((b) => b.id === updatedBook.id);
+							if (bookToUpdate) {
+								bookToUpdate.title = updatedBook.title;
+							}
+						}
+					}
+					return a;
+				});
+
+				// update authors "data"
+				context.dbAuthors.splice(0, authors.length, ...modifiedAuthors);
+
+				// set author book fields
+				const author = modifiedAuthors.find(
+					(a) => a.id === updatedBook.author?.id
+				);
+				updatedBook.author = author;
+			}
 		}
 
 		const modifiedBooks = books.map((b) => {

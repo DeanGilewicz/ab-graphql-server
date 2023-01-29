@@ -18,6 +18,7 @@ export const updateAuthor: Pick<MutationResolvers, "updateAuthor"> = {
 			id,
 			firstName: firstName ? firstName : existingAuthor.firstName,
 			lastName: lastName ? lastName : existingAuthor.lastName,
+			books: existingAuthor.books,
 		};
 
 		if (bookIds && bookIds.length > 0) {
@@ -68,6 +69,25 @@ export const updateAuthor: Pick<MutationResolvers, "updateAuthor"> = {
 				// ascending
 				return bookIdA > bookIdB ? 1 : bookIdA < bookIdB ? -1 : 0;
 			});
+		} else {
+			// allow update of author fields on associated books when books not provided
+			const books: Book[] = cloneDeep(context.dbBooks);
+
+			// set updated author on associated existing books
+			const modifiedExistingBooks = updatedAuthor.books?.map((b) => {
+				if (b.author?.id === updatedAuthor.id) {
+					b.author = updatedAuthor;
+				}
+				return b;
+			});
+
+			if (modifiedExistingBooks) {
+				// update books "data"
+				context.dbBooks.splice(0, books.length, ...modifiedExistingBooks);
+
+				// set modified books on author
+				updatedAuthor.books = modifiedExistingBooks;
+			}
 		}
 
 		const modifiedAuthors = authors.map((a) => {

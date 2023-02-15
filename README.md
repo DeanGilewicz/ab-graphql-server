@@ -41,6 +41,7 @@
     </li>
     <li><a href="#usage">Usage</a></li>
     <li><a href="#cicd">CI/CD</a></li>
+    <li><a href="#deployment">Deployment</a></li>
   </ol>
 </details>
 
@@ -177,6 +178,12 @@ Note: restarting the server will cause all data to be lost.
 The application has been dockerized in order to provide an easier way to manage deployment.
 
 Currently, [GitHub Actions](https://docs.github.com/en/actions) has been set up as the CI/CD solution. There is an action for PR review that runs `linting`, `type checking` and `tests` and there is an action to facilitate production deployment.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## Deployment
+
+In order to improve security an `isAllowedOrigin` function is used to allow specific origins access to this application avoiding CORS errors.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
